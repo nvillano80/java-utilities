@@ -1,2 +1,2 @@
 # java-utilities
-This is a bunch of Java utilities.
+This is a bunch of Java utility classes.
