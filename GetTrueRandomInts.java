@@ -221,8 +221,6 @@
  * the legal processes of any jurisdiction or authority.
  */
 
-package getstuff;
-
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -237,7 +235,7 @@ import java.util.Arrays;
  *
  * @author Nick Villano
  */
-public class RandInts {
+public class GetTrueRandomInts {
 
     /**
      * the number of random integers requested
