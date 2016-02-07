@@ -455,7 +455,7 @@ public class Maze {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void test(String[] args) {
         Maze g = new Maze(25, '█', ' ');
         // prints out the maze
         g.println(true);
