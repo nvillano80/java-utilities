@@ -238,7 +238,7 @@ import java.util.ArrayList;
  * @author Nick Villano
  * @version 0.0
  */
-public class HTMLCode {
+public class GetHTMLCode {
 
     /**
      * The String representation of URL that the HTML is coming from
