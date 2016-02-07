@@ -278,7 +278,7 @@ public class GetTrueRandomInts {
      *
      * @since 0.0
      */
-    public RandInts(int inNum, int inMin, int inMax, int inBase) {
+    public GetTrueRandomInts(int inNum, int inMin, int inMax, int inBase) {
         num = inNum;
         min = inMin;
         max = inMax;
