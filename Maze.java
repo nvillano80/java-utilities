@@ -15,68 +15,6 @@ import java.util.Random;
 
 /**
  * A perfect maze generated using recursive backtracking.
- *
- * This code received an official rating of 10 out of 10 Qualities. Here is some ASCII art to celebrate this achievement.
- * 
- *                                   ,-.                  ,--,    ,--,                                                                                            
- *              ,--,             ,--/ /|    ,---. ,--,  ,--.'|  ,--.'|                                                                                            
- *       ,---,,--.'|           ,--. :/ |   /__./,--.'|  |  | :  |  | :                   ,---,   ,---.                                                            
- *   ,-+-. /  |  |,            :  : ' ,---.;  ; |  |,   :  : '  :  : '               ,-+-. /  | '   ,'\                                                           
- *  ,--.'|'   `--'_      ,---. |  '  /___/ \  | `--'_   |  ' |  |  ' |    ,--.--.   ,--.'|'   |/   /   |                                                          
- * |   |  ,"' ,' ,'|    /     \'  |  \   ;  \ ' ,' ,'|  '  | |  '  | |   /       \ |   |  ,"' .   ; ,. :                                                          
- * |   | /  | '  | |   /    / '|  |   \   \  \: '  | |  |  | :  |  | :  .--.  .-. ||   | /  | '   | |: :                                                          
- * |   | |  | |  | :  .    ' / '  : |. ;   \  ' |  | :  '  : |__'  : |__ \__\/: . .|   | |  | '   | .; :                                                          
- * |   | |  |/'  : |__'   ; :__|  | ' \ \   \   '  : |__|  | '.'|  | '.'|," .--.; ||   | |  |/|   :    |                                                          
- * |   | |--' |  | '.''   | '.''  : |--' \   `  |  | '.';  :    ;  :    /  /  ,.  ||   | |--'  \   \  /                                                           
- * |   |/     ;  :    |   :    ;  |,'     :   \ ;  :    |  ,   /|  ,   ;  :   .'   |   |/       `----'                                                            
- * '---'      |  ,   / \   \  /'--'        '---"|  ,   / ---`-'  ---`-'|  ,     .-.'---'                  ___                                                     
- *             ---`-'   `----'                   ---`-'      .--.--.    `-___--'          ,--,           /  .\                                                    
- *                        ,---, ,--,                        /  /    '.  ,--.'|_         ,--.'|           \  ; |                                                   
- *            ,---.     ,---.',--.'|        ,---,          |  :  /`. /  |  | :,'        |  | :            `--"                                                    
- *           '   ,'\    |   | |  |,     ,-+-. /  | ,----._,;  |  |--`   :  : ' :        :  : '                                                                    
- *    ,---. /   /   |   |   | `--'_    ,--.'|'   |/   /  ' |  :  ;_   .;__,'  /      .--|  ' |     ,---.                                                          
- *   /     .   ; ,. : ,--.__| ,' ,'|  |   |  ,"' |   :     |\  \    `.|  |   |     /_ ./'  | |    /     \                                                         
- *  /    / '   | |: :/   ,'   '  | |  |   | /  | |   | .\  . `----.   :__,'| :  , ' , ' |  | :   /    /  |                                                        
- * .    ' /'   | .; .   '  /  |  | :  |   | |  | .   ; ';  | __ \  \  | '  : |_/___/ \: '  : |__.    ' / |                                                        
- * '   ; :_|   :    '   ; |:  '  : |__|   | |  |/'   .   . |/  /`--'  / |  | '.'.  \  ' |  | '.''   ;   /|___                                                     
- * '   | '.'\   \  /|   | '/  |  | '.'|   | |--'  `---`-'| '--'.     /  ;  :    ;\  ;   ;  :    '   |  / /  .\                                                    
- * |   :    :`----' |   :    :;  :    |   |/      .'__/\_: | `--'---'   |  ,   /  \  \  |  ,   /|   :    \  ; |                                                   
- *  \   \  /         \   \  / |  ,   /'---'       |   :    :             ---`-'    :  \  ---`-'  \   \  / `--"                                                    
- *   `----'           `----'   ---`-'              \   \  /                         \  ' ;        `----'                                                          
- *      ,---,   ,----..           ,--,    ,---,   ,----..'              ,----..      `--`                     ,--,            ___                                 
- *   ,`--.' |  /   /   \         / .`| ,`--.' |  /   /   \             /   /   \                            ,--.'|    ,--,  ,--.'|_   ,--,                        
- *  /    /  : /   .     :       /' / ;/    /  : /   .     :           /   .     :           ,--,            |  | :  ,--.'|  |  | :,',--.'|                        
- * :    |.' '.   /   ;.  \     /  / .:    |.' '.   /   ;.  \         .   /   ;.  \        ,'_ /|            :  : '  |  |,   :  : ' :|  |,              .--.--.    
- * `----':  .   ;   /  ` ;    /  / ./`----':  .   ;   /  ` ;        .   ;   /  ` ;   .--. |  | :   ,--.--.  |  ' |  `--'_ .;__,'  / `--'_      ,---.  /  /    '   
- *    '   ' ;   |  ; \ ; |   / ./  /    '   ' ;   |  ; \ ; |        ;   |  ; \ ; | ,'_ /| :  . |  /       \ '  | |  ,' ,'||  |   |  ,' ,'|    /     \|  :  /`./   
- *    |   | |   :  | ; | '  /  /  /     |   | |   :  | ; | '        |   :  | ; | ' |  ' | |  . . .--.  .-. ||  | :  '  | |:__,'| :  '  | |   /    /  |  :  ;_     
- *    '   : .   |  ' ' ' : /  /  /      '   : .   |  ' ' ' :        .   |  ' ' ' : |  | ' |  | |  \__\/: . .'  : |__|  | :  '  : |__|  | :  .    ' / |\  \    `.  
- *    |   | '   ;  \; /  |;  /  /       |   | '   ;  \; /  |        '   ;  \; /  | :  | : ;  ; |  ," .--.; ||  | '.''  : |__|  | '.''  : |__'   ;   /| `----.   \ 
- *    '   : |\   \  ',  ./__;  /        '   : |\   \  ',  /          \   \  ',  . \'  :  `--'   \/  /  ,.  |;  :    |  | '.';  :    |  | '.''   |  / |/  /`--'  / 
- *    ;   |.' ;   :    /|   : /         ;   |.' ;   :    /            ;   :      ; :  ,      .-.;  :   .'   |  ,   /;  :    |  ,   /;  :    |   :    '--'.     /  
- *    '---'    \   \ .' ;   |/          '---'    \   \ .'              \   \ .'`--" `--`----'   |  ,     .-./---`-' |  ,   / ---`-' |  ,   / \   \  /  `--'---'   
- *              `---`   `---'                     `---`                 `---`                    `--`---'            ---`-'          ---`-'   `----'              
- *  
- * I just wanted to let the world know that I do believe in true random numbers. 
- * I hope I did not offend anyone by using only the measly pseudo random numbers 
- * that java provides. If you ever need this program (or any program) to 
- * implement true random numbers from the spring of true randomness, 
- * <https://www.random.org>, I would be glad to send you my Java code for using 
- * their API to generate truly random integers. In the words of The Beach Boys, 
- * "Be true to your school" and remember what got you to where you are today.
- * Here are a few quotes I will gift you with as a consolation: 
- * 
- * "The generation of random numbers is too important to be left to chance."
- *  —Robert R. Coveyou
- * 
- * "Random numbers should not be generated with a method chosen at random."
- *  —Donald Knuth
- * 
- * "Any one who considers arithmetical methods of producing random digits is, of
- *  course, in a state of sin."
- *  —John von Neumann
- * 
- * May these words of wisdom bring you courage.
  */
 public class Maze {
 
