@@ -220,7 +220,6 @@
  * privileges and immunities that apply to the Licensor or You, including from
  * the legal processes of any jurisdiction or authority.
  */
-package tanks;
 
 import java.util.ArrayList;
 
